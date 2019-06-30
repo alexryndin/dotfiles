@@ -18,6 +18,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 let g:plug_timeout = 300 " Increase vim-plug timeout for YouCompleteMe.
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer' }
 " Go support
+let g:go_def_mode = 'godef'
+let g:go_info_mode = 'gocode'
 Plug 'fatih/vim-go'
 
 call plug#end()
@@ -33,6 +35,8 @@ colorscheme gruvbox
 "   line numbers
 set nu
 set rnu
+"   new term config
+let g:go_term_mode = "split"
 
 " Set up persistent undo across all files.
 set undofile
@@ -45,6 +49,7 @@ command! Bd :bp | :sp | :bn | :bd
 " Netrw (tree) config
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 25
+let NERDTreeQuitOnOpen = 1
 
 
 " Key mappings
@@ -79,3 +84,14 @@ noremap <leader>tlr :set rnu!<cr>
 "   q-key
 noremap <leader>qq :wq<cr>
 noremap <leader>qQ :waq<cr>
+" tabs navigation
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 0gt
