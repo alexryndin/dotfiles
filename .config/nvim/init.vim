@@ -18,15 +18,17 @@ Plug 'ctrlpvim/ctrlp.vim'
 let g:plug_timeout = 300 " Increase vim-plug timeout for YouCompleteMe.
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer' }
 " Go support
-let g:go_def_mode = 'godef'
-let g:go_info_mode = 'gocode'
+" let g:go_def_mode = 'godef'
+" let g:go_info_mode = 'gocode'
 Plug 'fatih/vim-go'
 
 call plug#end()
 
+set omnifunc=''
 
 " YCM Configuration
 "
+
 let g:ycm_autoclose_preview_window_after_insertion = '1'
 
 " Look and feel
@@ -36,7 +38,7 @@ colorscheme gruvbox
 set nu
 set rnu
 "   new term config
-let g:go_term_mode = "split"
+" let g:go_term_mode = "split"
 
 " Set up persistent undo across all files.
 set undofile
@@ -58,6 +60,10 @@ let NERDTreeQuitOnOpen = 1
 noremap ; :
 noremap : ;
 
+" tab to move text blocks
+noremap <tab> >>
+noremap <s-tab> <<
+
 "   Navigation
 "   Fast split navigation with <Ctrl> + hjkl.
 noremap <c-h> <c-w><c-h>
@@ -75,6 +81,7 @@ noremap <leader>bb :CtrlPBuffer<cr>
 noremap <leader>bd :Bd<cr>
 noremap <leader>bD :w<cr>:Bd<cr>
 "   f-key
+noremap <leader>fer :e $MYVIMRC<cr>
 noremap <leader>ft :NERDTreeToggle<cr>
 noremap <leader>fs :w<cr>
 noremap <leader>fS :wa<cr>
