@@ -23,8 +23,9 @@ set $menu "rofi -modi combi,window -show combi -combi-modi run,drun"
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
-output HDMI-A-1 resolution 1920x1080 position 1920,0
-output DP-1 resolution 1920x1080 position 3840,-400 transform 270
+output DP-1 scale 1.5
+output DP-1 resolution 3840x2160 pos 0 0
+output eDP-1 pos 0 2160
 
 set $laptop eDP-1
 bindswitch --locked lid:on output $laptop disable

@@ -20,15 +20,14 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer' }
 " Go support
 " let g:go_def_mode = 'godef'
 " let g:go_info_mode = 'gocode'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
-set omnifunc=''
 
 " YCM Configuration
 "
-
+let g:ycm_key_list_stop_completion = [ '<C-y>', '<Enter>' ]
 let g:ycm_autoclose_preview_window_after_insertion = '1'
 
 " Look and feel
