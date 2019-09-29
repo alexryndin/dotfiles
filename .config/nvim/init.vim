@@ -14,34 +14,43 @@ let g:gruvbox_contrast_dark = 'hard'
     Plug 'easymotion/vim-easymotion'
     " Fuzzy files and buffers navigations
     Plug 'ctrlpvim/ctrlp.vim'
-    " Autocompletion
-    let g:plug_timeout = 300 " Increase vim-plug timeout for YouCompleteMe.
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer' }
-    " Go support
-    " let g:go_def_mode = 'godef'
-    " let g:go_info_mode = 'gocode'
+   " Autocompletion
+   let g:plug_timeout = 300 " Increase vim-plug timeout for YouCompleteMe.
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer', 'for': 'python' }
+    Plug 'dense-analysis/ale'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-    " Leader key popup menu
+   " Leader key popup menu
     Plug 'liuchengxu/vim-which-key'
-    " Custom statusbar
+   " Custom statusbar
     Plug 'vim-airline/vim-airline'
-    " Fzf vim plugin
+   " Fzf vim plugin
     Plug 'junegunn/fzf.vim'
-    " Colorize nested parentheses
+   " Colorize nested parentheses
     Plug 'luochen1990/rainbow'
-    " Git, show diff lines
+   " Git, show diff lines
     Plug 'airblade/vim-gitgutter'
-    " Magit
+   " Magit
     Plug 'jreybert/vimagit'
-    " Vim surround
+   " Vim surround
     Plug 'tpope/vim-surround'
-    " Git status etc
+   " Git status etc
     Plug 'tpope/vim-fugitive'
 call plug#end()
 
 
-" YCM Configuration
-"
+" https://github.com/golang/tools/blob/master/gopls/doc/vim.md
+" let g:ale_linters = {
+" 	\ 'go': ['gopls'],
+" 	\}
+let g:ale_linters = {'go': ['gofmt', 'golint', 'go vet', 'gopls']}
+"let g:ale_linters = {'go': ['gopls']}
+"let g:ale_go_gopls_options = ''
+" let g:ale_linters = {'go': ['gofmt', 'golint', 'go vet']}
+ let g:go_def_mode='gopls'
+ let g:go_info_mode='gopls'
+
+ YCM Configuration
+
 let g:ycm_key_list_stop_completion = [ '<C-y>', '<Enter>' ]
 let g:ycm_autoclose_preview_window_after_insertion = '1'
 " Disable shitty id completion
@@ -108,9 +117,6 @@ noremap <c-h> <c-w><c-h>
 noremap <c-j> <c-w><c-j>
 noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
-"   Buffer navigation (inspired by unimpired)
-noremap b] :bn<cr>
-noremap b[ :bp<cr>
 noremap <leader><tab> :b#<cr>
 
 "   Leader mappings
@@ -120,6 +126,7 @@ noremap <leader>bd :Bd<cr>
 noremap <leader>bD :w<cr>:Bd<cr>
 "   f-key
 noremap <leader>fed :e $MYVIMRC<cr>
+noremap <leader>fer :so $MYVIMRC<cr>
 noremap <leader>ft :NERDTreeToggle<cr>
 noremap <leader>fs :w<cr>
 noremap <leader>fS :wa<cr>
