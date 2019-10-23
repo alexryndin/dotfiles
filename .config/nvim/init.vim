@@ -35,6 +35,10 @@ let g:gruvbox_contrast_dark = 'hard'
     Plug 'tpope/vim-surround'
    " Git status etc
     Plug 'tpope/vim-fugitive'
+   " Rust support
+   Plug 'rust-lang/rust.vim'
+   " Tagbar support as suggested by rust-lang/rust.vim
+   Plug 'majutsushi/tagbar'
 call plug#end()
 
 
@@ -49,7 +53,7 @@ let g:ale_linters = {'go': ['gofmt', 'golint', 'go vet', 'gopls']}
  let g:go_def_mode='gopls'
  let g:go_info_mode='gopls'
 
- YCM Configuration
+" YCM Configuration
 
 let g:ycm_key_list_stop_completion = [ '<C-y>', '<Enter>' ]
 let g:ycm_autoclose_preview_window_after_insertion = '1'
@@ -117,6 +121,9 @@ noremap <c-h> <c-w><c-h>
 noremap <c-j> <c-w><c-j>
 noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
+"   Fast buffer navigation with <Ctrl> + hl
+noremap <a-l> :bn<cr>
+noremap <a-h> :bp<cr>
 noremap <leader><tab> :b#<cr>
 
 "   Leader mappings
