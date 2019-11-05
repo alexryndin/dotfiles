@@ -58,7 +58,7 @@ export GOPATH=~/codes/go
 PATH=${PATH}:${GOPATH}/bin/
 
 # Ssh keys managemet
-eval $(keychain --eval --quiet id_rsa id_rsa_git)
+eval $(keychain --eval --quiet id_rsa id_rsa_mailrudell)
 
 # Enable fzf
 source /usr/share/fzf/completion.zsh

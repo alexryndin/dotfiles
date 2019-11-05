@@ -110,7 +110,7 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 " Key mappings
 "
 
-" tab to move text blocks
+" 
 " https://stackoverflow.com/questions/14641942/how-to-unmap-tab-and-do-not-make-ctrl-i-invalid-in-vim
 " noremap <tab> >>
 " noremap <s-tab> <<
@@ -121,7 +121,7 @@ noremap <c-h> <c-w><c-h>
 noremap <c-j> <c-w><c-j>
 noremap <c-k> <c-w><c-k>
 noremap <c-l> <c-w><c-l>
-"   Fast buffer navigation with <Ctrl> + hl
+"   Fast buffer navigation with <Alt> + hl
 noremap <a-l> :bn<cr>
 noremap <a-h> :bp<cr>
 noremap <leader><tab> :b#<cr>
