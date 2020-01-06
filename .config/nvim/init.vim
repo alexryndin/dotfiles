@@ -4,10 +4,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " My favorite theme
 let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_light = 'hard'
     Plug 'morhetz/gruvbox'
     Plug 'scrooloose/nerdtree'
     " Easy file tree navigation
-    Plug 'tpope/vim-vinegar'
+"    Plug 'tpope/vim-vinegar'
     " Latest netrw
     Plug 'eiginn/netrw'
     " Easy motion :-)
@@ -16,7 +17,8 @@ let g:gruvbox_contrast_dark = 'hard'
     Plug 'ctrlpvim/ctrlp.vim'
    " Autocompletion
    let g:plug_timeout = 300 " Increase vim-plug timeout for YouCompleteMe.
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer', 'for': 'python' }
+    " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer', 'for': 'python' }
+    "    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer --clang-completer'}
     Plug 'dense-analysis/ale'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
    " Leader key popup menu
@@ -39,13 +41,49 @@ let g:gruvbox_contrast_dark = 'hard'
    Plug 'rust-lang/rust.vim'
    " Tagbar support as suggested by rust-lang/rust.vim
    Plug 'majutsushi/tagbar'
+   Plug 'prabirshrestha/async.vim'
+   Plug 'prabirshrestha/vim-lsp'
+   Plug 'prabirshrestha/asyncomplete.vim'
+   Plug 'prabirshrestha/asyncomplete-lsp.vim'
 call plug#end()
 
 
+" Background color
+set background=dark
+
+" vim-pls config
+"
+"   Register servers
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rls']},
+        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+
+"   idk what is this
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+let g:lsp_diagnostics_enabled = 0 " disable diagnostics support
+
+" vim-pls config ^^
+
+
+" ale config
 " https://github.com/golang/tools/blob/master/gopls/doc/vim.md
-" let g:ale_linters = {
-" 	\ 'go': ['gopls'],
-" 	\}
 let g:ale_linters = {'go': ['gofmt', 'golint', 'go vet', 'gopls']}
 "let g:ale_linters = {'go': ['gopls']}
 "let g:ale_go_gopls_options = ''
@@ -133,14 +171,20 @@ noremap <leader>bd :Bd<cr>
 noremap <leader>bD :w<cr>:Bd<cr>
 "   f-key
 noremap <leader>fed :e $MYVIMRC<cr>
+noremap <leader>fel :e $HOME/.config/nvim/ftplugin<cr>
 noremap <leader>fer :so $MYVIMRC<cr>
 noremap <leader>ft :NERDTreeToggle<cr>
 noremap <leader>fs :w<cr>
 noremap <leader>fS :wa<cr>
 noremap <leader>ff :FZF<cr>
-"   t-key
-noremap <leader>tll :set nu!<cr>
-noremap <leader>tlr :set rnu!<cr>
+"   t-key (tabs)
+noremap <leader>tn :tabnew<cr>
+"   u-key (ui)
+noremap <leader>ull :set nu!<cr>
+noremap <leader>ulr :set rnu!<cr>
+"   w-key
+noremap <leader>wn :vnew<cr>
+noremap <leader>wN :new<cr>
 "   q-key
 noremap <leader>qq :wq<cr>
 noremap <leader>qQ :waq<cr>
