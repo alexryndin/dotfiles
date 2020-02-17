@@ -57,6 +57,9 @@ export EDITOR="nvim -u NONE"
 export GOPATH=~/codes/go
 PATH=${PATH}:${GOPATH}/bin/
 
+# Add cargo env
+PATH=${PATH}:~/.cargo/bin
+
 # Ssh keys managemet
 eval $(keychain --eval --quiet id_rsa id_rsa_mailrudell)
 
@@ -64,3 +67,6 @@ eval $(keychain --eval --quiet id_rsa id_rsa_mailrudell)
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 alias config='/usr/bin/git --git-dir=/home/boss/codes/dotfiles2 --work-tree=/home/boss'
+alias vim='nvim'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
