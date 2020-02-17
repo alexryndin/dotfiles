@@ -14,7 +14,6 @@ let g:gruvbox_contrast_light = 'hard'
     " Easy motion :-)
     Plug 'easymotion/vim-easymotion'
     " Fuzzy files and buffers navigations
-    Plug 'ctrlpvim/ctrlp.vim'
    " Autocompletion
    let g:plug_timeout = 300 " Increase vim-plug timeout for YouCompleteMe.
     " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer', 'for': 'python' }
@@ -54,12 +53,23 @@ set background=dark
 " vim-pls config
 "
 "   Register servers
+"       Rust
 if executable('rls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'rls',
         \ 'cmd': {server_info->['rls']},
         \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
         \ 'whitelist': ['rust'],
+        \ })
+endif
+
+"       Python
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
         \ })
 endif
 
@@ -80,6 +90,9 @@ augroup END
 let g:lsp_diagnostics_enabled = 0 " disable diagnostics support
 
 " vim-pls config ^^
+
+" rust-vim
+let g:rustfmt_options = '--edition 2018'
 
 
 " ale config
