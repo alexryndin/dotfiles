@@ -73,6 +73,18 @@ if executable('pyls')
         \ })
 endif
 
+"      Go
+"      Disable for a while
+"
+" if executable('gopls')
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'gopls',
+"         \ 'cmd': {server_info->['gopls']},
+"         \ 'whitelist': ['go'],
+"         \ })
+"     autocmd BufWritePre *.go LspDocumentFormatSync
+" endif
+
 "   idk what is this
 
 function! s:on_lsp_buffer_enabled() abort
@@ -112,6 +124,7 @@ let g:ycm_autoclose_preview_window_after_insertion = '1'
 " let g:ycm_min_num_of_chars_for_completion = 99
 
 " Look and feel
+"
 "   Colors and themes
 colorscheme gruvbox
 "   line numbers
@@ -127,7 +140,13 @@ set shiftwidth=4
 set expandtab
 " Set up persistent undo across all files.
 set undofile
-"
+"   Highlight whitespaces
+highlight ExtraWhitespace ctermbg=blue guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 
 " Close buffer without closing window. (facepalm)
@@ -190,6 +209,8 @@ noremap <leader>ft :NERDTreeToggle<cr>
 noremap <leader>fs :w<cr>
 noremap <leader>fS :wa<cr>
 noremap <leader>ff :FZF<cr>
+"   m-key
+noremap <leader>mh :LspHover<cr>
 "   t-key (tabs)
 noremap <leader>tn :tabnew<cr>
 "   u-key (ui)
@@ -214,8 +235,10 @@ noremap <leader>9 9gt
 noremap <leader>0 0gt
 
 " Which key configuration
-" 
+"
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+
+
 " Learn vimscript the hard way exercises
 " Chapter 01
 echo ">^.^<"
