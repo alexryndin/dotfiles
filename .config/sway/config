@@ -299,7 +299,7 @@ bindsym $mod+r mode "resize"
     bindsym --release Shift+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'grim-%d.%m.%Y-%H%M%S.png')
 
 # Font config
-font pango:Ubuntu 10
+font pango:SourceCodePro 10
 #
 # Status Bar:
 #
