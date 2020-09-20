@@ -109,6 +109,13 @@ input "1102:4619:DLL07A7:01_044E:120B" {
     natural_scroll enabled
     middle_emulation enabled
 }
+input "1739:52632:MSFT0004:00_06CB:CD98_Touchpad" {
+    tap enabled
+    pointer_accel 0.4
+    accel_profile adaptive
+    natural_scroll enabled
+    middle_emulation enabled
+}
 ### Key bindings
 #
 # Basics:
