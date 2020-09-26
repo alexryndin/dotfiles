@@ -175,8 +175,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
 
-
-
 " Key mappings
 "
 
@@ -205,6 +203,7 @@ noremap <leader>bD :w<cr>:Bd<cr>
 noremap <leader>fed :e $MYVIMRC<cr>
 noremap <leader>fel :e $HOME/.config/nvim/ftplugin<cr>
 noremap <leader>fer :so $MYVIMRC<cr>
+noremap <leader>fec :e $HOME/.config<cr>
 noremap <leader>ft :NERDTreeToggle<cr>
 noremap <leader>fs :w<cr>
 noremap <leader>fS :wa<cr>
