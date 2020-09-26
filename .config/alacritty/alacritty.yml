@@ -76,6 +76,7 @@ font:
     #   - (Linux) monospace
     #   - (Windows) Consolas
     family: Sauce Code Pro Nerd Font
+    color: #ffffff
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -147,8 +148,8 @@ colors:
   primary:
 #    background: '0x282828'
 #    foreground: '0xfcf6d5'
-    foreground: '0xffd7af'
-    background: '0x1c1c1c'
+    foreground: '0x000000'
+    background: '0xeeeeee'
 
     # Bright and dim foreground colors
     #
