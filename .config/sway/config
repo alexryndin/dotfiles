@@ -49,7 +49,8 @@ for_window [app_id="^launcher$"] floating enable, border none, opacity 0.8
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/boss/Pictures/Sway_Wallpaper_Blue_1920x1080.png fill
 
 output DP-1 scale 1.5
 output DP-1 resolution 3840x2160 pos 0 0
@@ -313,16 +314,18 @@ font pango:SourceCodePro 10
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
+    swaybar_command waybar
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command i3status
 
     colors {
-        statusline #ffffff
-        background #323232
+        statusline #000000
+        background #eeeeee
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
+client.focused #000000 #252525 #eeeeee #bbffbb #dddddd
+client.unfocused #000000 #eeeeee #000000 #bbffbb #dddddd
 
 include /etc/sway/config.d/*
