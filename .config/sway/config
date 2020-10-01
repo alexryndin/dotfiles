@@ -325,7 +325,7 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
-client.focused #000000 #252525 #eeeeee #bbffbb #dddddd
-client.unfocused #000000 #eeeeee #000000 #bbffbb #dddddd
+client.focused #ffd7af #1c1c1c #ffd7af #bbffbb #ffd7af
+client.unfocused #000000 #1c1c1c #ffd7af #bbffbb #ffd7af
 
 include /etc/sway/config.d/*

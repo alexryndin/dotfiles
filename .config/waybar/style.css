@@ -1,4 +1,5 @@
 * {
+    min-width: 0px;
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
@@ -8,8 +9,8 @@
 }
 
 window#waybar {
-    background-color: #eee;
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    background-color: #1c1c1c;
+    border-bottom: 3px solid rgba(255, 215, 176, 0.5);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -38,22 +39,20 @@ window#waybar.firefox {
 }
 
 #workspaces button {
-    padding: 0 5px;
     background-color: transparent;
-    color: #000;
-    border-bottom: 3px solid rgba(100, 114, 195, 0.5);
+    color: #ffd7af;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
     box-shadow: inherit;
-    border-bottom: 3px solid #ffffff;
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    font-family: SourceCodePro;
+    color: #1c1c1c;
+    background-color: #ffd7af;
 }
 
 #workspaces button.urgent {
@@ -77,26 +76,20 @@ window#waybar.firefox {
 #tray,
 #mode,
 #idle_inhibitor{
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    border-bottom: 3px solid rgba(255, 215, 176, 0.5);
+    background-color: #1c1c1c;
     padding: 0 10px;
     margin: 0 4px;
-    color: #ffffff;
-}
-
-#clock {
-    background-color: #eee;
-    color: #000;
+    color: #ffd7af;
 }
 
 #battery {
-    background-color: #eee;
     padding-right: 19px;
-    color: #000000;
 }
 
 #battery.charging {
     color: #ffffff;
-    background-color: #26A65B;
+    background-color: #36863B;
 }
 
 @keyframes blink {
@@ -114,17 +107,6 @@ window#waybar.firefox {
 label:focus {
     background-color: #ff0000;
 }
-
-#cpu {
-    background-color: #eee;
-    color: #000000;
-}
-
-#memory, #network, #backlight, #pulseaudio {
-    background-color: #eee;
-    color: #000000;
-}
-
 
 #network.disconnected {
     background-color: #f53c3c;
@@ -145,17 +127,8 @@ label:focus {
     background-color: #ffa000;
 }
 
-#temperature {
-    background-color: #eeeeee;
-    color: #000000;
-}
-
 #temperature.critical {
     background-color: #eb4d4b;
-}
-
-#tray {
-    background-color: #2980b9;
 }
 
 #idle_inhibitor {
