@@ -51,6 +51,9 @@ call plug#end()
 set background=dark
 
 " vim-pls config
+let g:asyncomplete_auto_popup = 0
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+set completeopt=menuone,noinsert,noselect,preview
 "
 "   Register servers
 "       Rust
