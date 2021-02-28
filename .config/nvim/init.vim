@@ -28,22 +28,17 @@ let g:gruvbox_contrast_light = 'hard'
     Plug 'junegunn/fzf.vim'
    " Colorize nested parentheses
     Plug 'luochen1990/rainbow'
-   " Git, show diff lines
-    Plug 'airblade/vim-gitgutter'
-   " Magit
-    Plug 'jreybert/vimagit'
-   " Vim surround
-    Plug 'tpope/vim-surround'
-   " Git status etc
-    Plug 'tpope/vim-fugitive'
-   " Rust support
-   Plug 'rust-lang/rust.vim'
-   " Tagbar support as suggested by rust-lang/rust.vim
-   Plug 'majutsushi/tagbar'
-   Plug 'prabirshrestha/async.vim'
-   Plug 'prabirshrestha/vim-lsp'
-   Plug 'prabirshrestha/asyncomplete.vim'
-   Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'airblade/vim-gitgutter'      " Git, show diff lines
+    Plug 'jreybert/vimagit'            " Magit
+    Plug 'tpope/vim-surround'          " Vim surround
+    Plug 'tpope/vim-fugitive'          " Git status etc
+    Plug 'rust-lang/rust.vim'          " Rust support
+    Plug 'majutsushi/tagbar'           " Tagbar support as suggested by rust-lang/rust.vim
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'sevko/vim-nand2tetris-syntax'
 call plug#end()
 
 
@@ -51,9 +46,9 @@ call plug#end()
 set background=dark
 
 " vim-pls config
-let g:asyncomplete_auto_popup = 0
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-set completeopt=menuone,noinsert,noselect,preview
+" let g:asyncomplete_auto_popup = 0
+" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" set completeopt=menuone,noinsert,noselect,preview
 "
 "   Register servers
 "       Rust
@@ -107,24 +102,18 @@ let g:lsp_diagnostics_enabled = 0 " disable diagnostics support
 " vim-pls config ^^
 
 " rust-vim
-let g:rustfmt_options = '--edition 2018'
+" let g:rustfmt_options = '--edition 2018'
 
 
 " ale config
 " https://github.com/golang/tools/blob/master/gopls/doc/vim.md
-let g:ale_linters = {'go': ['gofmt', 'golint', 'go vet', 'gopls']}
+"let g:ale_linters = {'go': ['gofmt', 'golint', 'go vet', 'gopls']}
 "let g:ale_linters = {'go': ['gopls']}
 "let g:ale_go_gopls_options = ''
+let g:ale_linters = {'rust': ['rustc', 'rls']}
 " let g:ale_linters = {'go': ['gofmt', 'golint', 'go vet']}
- let g:go_def_mode='gopls'
- let g:go_info_mode='gopls'
-
-" YCM Configuration
-
-let g:ycm_key_list_stop_completion = [ '<C-y>', '<Enter>' ]
-let g:ycm_autoclose_preview_window_after_insertion = '1'
-" Disable shitty id completion
-" let g:ycm_min_num_of_chars_for_completion = 99
+" let g:go_def_mode='gopls'
+" let g:go_info_mode='gopls'
 
 " Look and feel
 "
