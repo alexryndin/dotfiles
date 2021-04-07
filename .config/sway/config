@@ -305,6 +305,9 @@ bindsym $mod+r mode "resize"
     bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
     bindsym XF86MonBrightnessUp exec light -A 10
     bindsym XF86MonBrightnessDown exec light -U 10
+    bindsym XF86AudioPlay exec playerctl play-pause
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
 
 # Print screen
     bindsym --release Print exec grim $(xdg-user-dir PICTURES)/$(date +'grim-%d.%m.%Y-%H%M%S.png')
@@ -324,12 +327,12 @@ bar {
     # The default just shows the current date and time.
 
     colors {
-        statusline #000000
-        background #eeeeee
+        statusline #ffd7af
+        background #1c1c1c
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
-client.focused #ffd7af #1c1c1c #ffd7af #bbffbb #ffd7af
+client.focused #ffd7af #1c2f1c #ffd7af #bbffbb #ffd7af
 client.unfocused #000000 #1c1c1c #ffd7af #bbffbb #ffd7af
 
 include /etc/sway/config.d/*
