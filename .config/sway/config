@@ -39,8 +39,8 @@ set $rightru $l
 # Your preferred terminal emulator
 set $term alacritty
 # Your preferred application launcher
-set $mymenu "alacritty --class='launcher' -e bash -c 'compgen -c | grep -v fzf | sort -u | fzf --layout=reverse | xargs -r swaymsg -t command exec'"
-set $menu "rofi -modi combi,window -show combi -combi-modi run,drun"
+set $mymenu "alacritty --class='launcher' -e /home/boss/codes/launcher/launcher.sh"
+set $menu "rofi -modi combi -show combi -combi-modi run,drun"
 # My menu
 bindsym $mod+g exec $mymenu
 bindsym $mod+$g exec $mymenu
@@ -301,6 +301,9 @@ bindsym $mod+r mode "resize"
     bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
     bindsym XF86MonBrightnessUp exec light -A 10
     bindsym XF86MonBrightnessDown exec light -U 10
+    bindsym XF86AudioPlay exec playerctl play-pause
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
 
 # Print screen
     bindsym --release Print exec grim $(xdg-user-dir PICTURES)/$(date +'grim-%d.%m.%Y-%H%M%S.png')
@@ -314,18 +317,20 @@ font pango:SourceCodePro 10
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-    swaybar_command waybar
+    status_command i3status
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
 
     colors {
-        statusline #000000
-        background #eeeeee
+        statusline #ffd7af
+        background #1c1c1c
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
-client.focused #ffd7af #1c1c1c #ffd7af #bbffbb #ffd7af
+client.focused #ffd7af #1c2f1c #ffd7af #bbffbb #ffd7af
 client.unfocused #000000 #1c1c1c #ffd7af #bbffbb #ffd7af
 
 include /etc/sway/config.d/*
+
+#xwayland disable
