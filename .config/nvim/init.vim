@@ -175,12 +175,21 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 " noremap <tab> >>
 " noremap <s-tab> <<
 
+function! TmuxMove(direction)
+        let wnr = winnr()
+        silent! execute 'wincmd ' . a:direction
+        " If the winnr is still the same after we moved, it is the last pane
+        if wnr == winnr()
+                call system('tmux select-pane -' . tr(a:direction, 'phjkl', 'lLDUR'))
+        end
+endfunction
+
 "   Navigation
 "   Fast split navigation with <Ctrl> + hjkl.
-noremap <c-h> <c-w><c-h>
-noremap <c-j> <c-w><c-j>
-noremap <c-k> <c-w><c-k>
-noremap <c-l> <c-w><c-l>
+noremap <c-h> :call TmuxMove('h')<cr>
+noremap <c-j> :call TmuxMove('j')<cr>
+noremap <c-k> :call TmuxMove('k')<cr>
+noremap <c-l> :call TmuxMove('l')<cr>
 "   Fast buffer navigation with <Alt> + hl
 noremap <a-l> :bn<cr>
 noremap <a-h> :bp<cr>
