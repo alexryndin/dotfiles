@@ -22,8 +22,7 @@ let g:gruvbox_contrast_light = 'hard'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
    " Leader key popup menu
     Plug 'liuchengxu/vim-which-key'
-   " Custom statusbar
-    Plug 'vim-airline/vim-airline'
+    Plug 'hoob3rt/lualine.nvim'         " Custom statusbar
    " Fzf vim plugin
     Plug 'junegunn/fzf.vim'
    " Colorize nested parentheses
@@ -34,11 +33,8 @@ let g:gruvbox_contrast_light = 'hard'
     Plug 'tpope/vim-fugitive'          " Git status etc
     Plug 'rust-lang/rust.vim'          " Rust support
     Plug 'majutsushi/tagbar'           " Tagbar support as suggested by rust-lang/rust.vim
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
     Plug 'sevko/vim-nand2tetris-syntax'
+    Plug 'neovim/nvim-lspconfig'
 call plug#end()
 
 
@@ -47,29 +43,11 @@ set background=dark
 
 " vim-pls config
 " let g:asyncomplete_auto_popup = 0
-" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-" set completeopt=menuone,noinsert,noselect,preview
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+set completeopt=menuone,noinsert,noselect,preview
 "
 "   Register servers
 "       Rust
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rls']},
-        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
-        \ 'whitelist': ['rust'],
-        \ })
-endif
-
-"       Python
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
 
 "      Go
 "      Disable for a while
@@ -85,17 +63,6 @@ endif
 
 "   idk what is this
 
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
-    " refer to doc to add more commands
-endfunction
-
-augroup lsp_install
-    au!
-    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
 
 let g:lsp_diagnostics_enabled = 0 " disable diagnostics support
 
@@ -250,3 +217,53 @@ noremap <c-u> vawUe
 " Chapter 09
 noremap H 0
 noremap L $
+
+lua << EOF
+    local nvim_lsp = require('lspconfig')
+    -- Use an on_attach function to only map the following keys
+    -- after the language server attaches to the current buffer
+    local on_attach = function(client, bufnr)
+      local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+      local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+      --Enable completion triggered by <c-x><c-o>
+      buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+      -- Mappings.
+      local opts = { noremap=true, silent=true }
+
+      -- See `:help vim.lsp.*` for documentation on any of the below functions
+      buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+      buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+      buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+      buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+      buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+      buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+      buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+      buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+      buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+      buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+      buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+      buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+      buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+      buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+      buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+      buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+    end
+
+    -- Use a loop to conveniently call 'setup' on multiple servers and
+    -- map buffer local keybindings when the language server attaches
+    local servers = { "clangd", "gopls", "pylsp" }
+    for _, lsp in ipairs(servers) do
+        nvim_lsp[lsp].setup {
+            on_attach = on_attach,
+              flags = {
+                  debounce_text_changes = 150,
+              }
+        }
+    end
+    require('lualine').setup {
+        options = { theme = 'gruvbox' }
+    }
+EOF
