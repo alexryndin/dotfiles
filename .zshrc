@@ -70,3 +70,4 @@ alias config='/usr/bin/git --git-dir=/home/boss/codes/dotfiles2 --work-tree=/hom
 alias vim='nvim'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
+export XDG_CURRENT_DESKTOP=sway
