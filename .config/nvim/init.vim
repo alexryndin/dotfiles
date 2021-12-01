@@ -78,6 +78,7 @@ let g:lsp_diagnostics_enabled = 0 " disable diagnostics support
 "let g:ale_linters = {'go': ['gopls']}
 "let g:ale_go_gopls_options = ''
 let g:ale_linters = {'rust': ['rustc', 'rls']}
+let g:ale_c_parse_makefile = 1
 " let g:ale_linters = {'go': ['gofmt', 'golint', 'go vet']}
 " let g:go_def_mode='gopls'
 " let g:go_info_mode='gopls'
@@ -95,6 +96,7 @@ set rnu
 set tabstop=4
 " when indenting with '>', use 4 spaces width
 set shiftwidth=4
+set softtabstop=4
 " On pressing tab, insert 4 spaces
 set expandtab
 " Set up persistent undo across all files.
@@ -167,6 +169,9 @@ noremap <leader><tab> :b#<cr>
 noremap <leader>bb :Buffer<cr>
 noremap <leader>bd :Bd<cr>
 noremap <leader>bD :w<cr>:Bd<cr>
+"   e-key
+noremap <leader>en :ALENextWrap<cr>
+noremap <leader>ep :ALEPreviousWrap<cr>
 "   f-key
 noremap <leader>fed :e $MYVIMRC<cr>
 noremap <leader>fel :e $HOME/.config/nvim/ftplugin<cr>
@@ -177,7 +182,7 @@ noremap <leader>fs :w<cr>
 noremap <leader>fS :wa<cr>
 noremap <leader>ff :FZF<cr>
 "   m-key
-noremap <leader>mh :LspHover<cr>
+noremap <leader>mp :vertical Man<cr>
 "   t-key (tabs)
 noremap <leader>tn :tabnew<cr>
 "   u-key (ui)
@@ -187,8 +192,8 @@ noremap <leader>ulr :set rnu!<cr>
 noremap <leader>wn :vnew<cr>
 noremap <leader>wN :new<cr>
 "   q-key
-noremap <leader>qq :wq<cr>
-noremap <leader>qQ :waq<cr>
+noremap <leader>qq :q<cr>
+noremap <leader>qQ :wq<cr>
 " tabs navigation
 noremap <leader>1 1gt
 noremap <leader>2 2gt
@@ -233,8 +238,8 @@ lua << EOF
       local opts = { noremap=true, silent=true }
 
       -- See `:help vim.lsp.*` for documentation on any of the below functions
-      buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-      buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+      buf_set_keymap('n', '<space>gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+      buf_set_keymap('n', '<space>gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
       buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
       buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
       buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
@@ -248,7 +253,7 @@ lua << EOF
       buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
       buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
       buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-      buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+      buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting({ tabSize = 4 })<CR>", opts)
 
     end
 
