@@ -15,7 +15,7 @@ bindkey -e
 autoload -U colors && colors
 # very simple fire promt 
 PS1='%}%B%F{yellow}%K{black}%~/%b%f%k
-%b%F{black}%K{red}█▓▒░%b%F{yellow}%K{red}░▒▓█%B%F{yellow}%K{yellow}░▒▓█%b%k%f%B%F{yellow}%b%f%k  '
+%b%F{black}%K{red}█▓▒░%b%F{yellow}%K{red}░▒▓█%b%F{red}%K{yellow}%(?..%?)%B%F{yellow}%K{yellow}░▒▓█%b%k%f%B%F{yellow}%b%f%k  '
 # Prompt without pc name
 #PS1='%}%B%F{yellow}%K{black}%~/%b%f%k
 #%b%F{black}%K{red}█▓▒░%b%F{yellow}%K{red}░▒▓█%B%F{yellow}%K{yellow}░▒▓█%b%k%f%B%F{yellow}%b%f%k  '
@@ -71,3 +71,4 @@ alias vim='nvim'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 export XDG_CURRENT_DESKTOP=sway
+export MANPAGER='nvim +Man!'
