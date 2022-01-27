@@ -35,6 +35,7 @@ let g:gruvbox_contrast_light = 'hard'
     Plug 'majutsushi/tagbar'           " Tagbar support as suggested by rust-lang/rust.vim
     Plug 'sevko/vim-nand2tetris-syntax'
     Plug 'neovim/nvim-lspconfig'
+    Plug 'rderik/vim-markdown-toc'
 call plug#end()
 
 
@@ -77,7 +78,7 @@ let g:lsp_diagnostics_enabled = 0 " disable diagnostics support
 "let g:ale_linters = {'go': ['gofmt', 'golint', 'go vet', 'gopls']}
 "let g:ale_linters = {'go': ['gopls']}
 "let g:ale_go_gopls_options = ''
-let g:ale_linters = {'rust': ['rustc', 'rls']}
+let g:ale_linters = {'rust': ['rustc', 'rls'], 'c': ['clangd', 'clang-format', 'clangtidy']}
 let g:ale_c_parse_makefile = 1
 " let g:ale_linters = {'go': ['gofmt', 'golint', 'go vet']}
 " let g:go_def_mode='gopls'
@@ -101,6 +102,8 @@ set softtabstop=4
 set expandtab
 " Set up persistent undo across all files.
 set undofile
+let b:man_default_sects = '2,3'
+au FileType c let b:man_default_sects = '2,3'
 "   Highlight whitespaces
 highlight ExtraWhitespace ctermbg=blue guibg=red
 match ExtraWhitespace /\s\+$/
@@ -272,3 +275,4 @@ lua << EOF
         options = { theme = 'gruvbox' }
     }
 EOF
+
