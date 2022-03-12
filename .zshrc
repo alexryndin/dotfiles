@@ -1,4 +1,5 @@
 setopt extendedglob
+setopt PROMPT_SUBST
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/boss/.zshrc'
 
@@ -12,9 +13,14 @@ bindkey -e
 #autoload -U promptinit
 #promptinit
 #prompt fire
+
+# vcs info
+autoload -Uz vcs_info
+precmd () { vcs_info }
+
 autoload -U colors && colors
 # very simple fire promt 
-PS1='%}%B%F{yellow}%K{black}%~/%b%f%k
+PS1='%}%B%F{yellow}%K{black}%~/${vcs_info_msg_0_}%b%f%k
 %b%F{black}%K{red}█▓▒░%b%F{yellow}%K{red}░▒▓█%b%F{red}%K{yellow}%(?..%?)%B%F{yellow}%K{yellow}░▒▓█%b%k%f%B%F{yellow}%b%f%k  '
 # Prompt without pc name
 #PS1='%}%B%F{yellow}%K{black}%~/%b%f%k
@@ -48,7 +54,6 @@ autoload -U select-word-style
 #bindkey '^[^?' backward-kill-dir
 
 
-
 # missing keybindings
 bindkey  "^[[3~"   delete-char
 export EDITOR="nvim -u NONE"
@@ -61,7 +66,7 @@ PATH=${PATH}:${GOPATH}/bin/
 PATH=${PATH}:~/.cargo/bin
 
 # Ssh keys managemet
-eval $(keychain --eval --quiet id_rsa id_rsa_mailrudell)
+eval $(keychain --eval --quiet id_rsa)
 
 # Enable fzf
 source /usr/share/fzf/completion.zsh
@@ -72,3 +77,4 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 export XDG_CURRENT_DESKTOP=sway
 export MANPAGER='nvim +Man!'
+export MOZ_ENABLE_WAYLAND=1
