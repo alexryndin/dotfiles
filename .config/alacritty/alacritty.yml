@@ -153,6 +153,8 @@ colors:
 #    background: '0xeeeeee'
     foreground: '0xffd7af'
     background: '0x1c1c1c'
+      # foreground: '0x7fd67f'
+      #background: '0x101c10'
 
     # Bright and dim foreground colors
     #
@@ -355,7 +357,6 @@ live_config_reload: true
 enable_experimental_conpty_backend: false
 
 # Send ESC (\x1b) before characters when alt is pressed.
-alt_send_esc: true
 
 debug:
   render_timer: false
