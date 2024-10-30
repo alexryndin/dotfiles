@@ -8,6 +8,31 @@ zstyle :compinstall filename '/home/boss/.zshrc'
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
+
+# Immediately append to history file:
+setopt INC_APPEND_HISTORY
+
+# Record timestamp in history:
+setopt EXTENDED_HISTORY
+
+# Expire duplicate entries first when trimming history:
+setopt HIST_EXPIRE_DUPS_FIRST
+
+# Dont record an entry that was just recorded again:
+setopt HIST_IGNORE_DUPS
+
+# Delete old recorded entry if new entry is a duplicate:
+setopt HIST_IGNORE_ALL_DUPS
+
+# Do not display a line previously found:
+setopt HIST_FIND_NO_DUPS
+
+# Dont record an entry starting with a space:
+setopt HIST_IGNORE_SPACE
+
+# Dont write duplicate entries in the history file:
+setopt HIST_SAVE_NO_DUPS
+
 bindkey -e
 # End of lines configured by zsh-newuser-install
 #autoload -U promptinit
@@ -44,8 +69,8 @@ PATH=${PATH}:/home/boss/.local/bin
 
 # delete to a slash or a word in zsh?
 # https://unix.stackexchange.com/questions/258656/how-can-i-delete-to-a-slash-or-a-word-in-zsh
-WORDCHARS=${WORDCHARS/\/}
-autoload -U select-word-style
+#WORDCHARS=${WORDCHARS/\/}
+#autoload -U select-word-style
 #backward-kill-dir () {
 #    local WORDCHARS=${WORDCHARS/\/}
 #    zle backward-kill-word
@@ -59,7 +84,7 @@ bindkey  "^[[3~"   delete-char
 export EDITOR="nvim -u NONE"
 
 # Add golang vars
-export GOPATH=~/codes/go
+export GOPATH=~/.go
 PATH=${PATH}:${GOPATH}/bin/
 
 # Add cargo env
@@ -78,3 +103,13 @@ alias egrep='egrep --color=auto'
 export XDG_CURRENT_DESKTOP=sway
 export MANPAGER='nvim +Man!'
 export MOZ_ENABLE_WAYLAND=1
+
+## Enable pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#readme
+#export PYENV_ROOT="$HOME/.pyenv"
+#[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
+
+## YTSAURUS STUFF
+export YT_PROXY=jupiter.yt.vk.team
+export YT_TOKEN=$(cat ~/.yt/token)
+
