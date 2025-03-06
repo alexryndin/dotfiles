@@ -44,9 +44,17 @@ autoload -Uz vcs_info
 precmd () { vcs_info }
 
 autoload -U colors && colors
-# very simple fire promt 
-PS1='%}%B%F{yellow}%K{black}%~/${vcs_info_msg_0_}%b%f%k
-%b%F{black}%K{red}█▓▒░%b%F{yellow}%K{red}░▒▓█%b%F{red}%K{yellow}%(?..%?)%B%F{yellow}%K{yellow}░▒▓█%b%k%f%B%F{yellow}%b%f%k  '
+# Determine whether we're in an SSH session
+if [[ -n "$SSH_CONNECTION" ]]; then
+  PROMPT_USER_HOST="%B%F{yellow}%K{black}%n@%m %b%f%k"
+else
+  PROMPT_USER_HOST=""
+fi
+
+# Define your prompt
+PS1="${PROMPT_USER_HOST}%}%B%F{yellow}%K{black}%~/${vcs_info_msg_0_}%b%f%k
+%b%F{black}%K{red}█▓▒░%b%F{yellow}%K{red}░▒▓█%b%F{red}%K{yellow}%(?..%?)%B%F{yellow}%K{yellow}░▒▓█%b%k%f%B%F{yellow}%b%f%k  "
+
 # Prompt without pc name
 #PS1='%}%B%F{yellow}%K{black}%~/%b%f%k
 #%b%F{black}%K{red}█▓▒░%b%F{yellow}%K{red}░▒▓█%B%F{yellow}%K{yellow}░▒▓█%b%k%f%B%F{yellow}%b%f%k  '
@@ -113,3 +121,5 @@ export MOZ_ENABLE_WAYLAND=1
 export YT_PROXY=jupiter.yt.vk.team
 export YT_TOKEN=$(cat ~/.yt/token)
 
+# rootless docker
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
