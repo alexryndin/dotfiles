@@ -227,7 +227,6 @@ noremap H 0
 noremap L $
 
 lua << EOF
-    local nvim_lsp = require('lspconfig')
     -- Use an on_attach function to only map the following keys
     -- after the language server attaches to the current buffer
     local on_attach = function(client, bufnr)
@@ -252,11 +251,11 @@ lua << EOF
       buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
       buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
       buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-      buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-      buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-      buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-      buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-      buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting({ tabSize = 4 })<CR>", opts)
+      buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+      buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+      buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+      buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+      buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format({ tabSize = 4 })<CR>", opts)
 
     end
 
@@ -264,12 +263,13 @@ lua << EOF
     -- map buffer local keybindings when the language server attaches
     local servers = { "clangd", "gopls", "pylsp" }
     for _, lsp in ipairs(servers) do
-        nvim_lsp[lsp].setup {
+        vim.lsp.config(lsp, {
             on_attach = on_attach,
-              flags = {
-                  debounce_text_changes = 150,
-              }
-        }
+            flags = {
+                debounce_text_changes = 150,
+            },
+        })
+        vim.lsp.enable(lsp)
     end
     require('lualine').setup {
         options = { theme = 'gruvbox' }
